@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I miss u</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Roboto Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      user-select: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 380px;
+      background: #181818;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 0 15px #d6336c66;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .photo-wrapper {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      overflow: hidden;
+      border-radius: 40px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px #d6336c88;
+      background: #222;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .photo-wrapper:active {
+      cursor: grabbing;
+    }
+
+    .slider {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .text-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-align: center;
+      color: #fff;
+      letter-spacing: 0.03em;
+    }
+
+    .counter {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #f8a5c2;
+      text-align: center;
+      font-weight: 400;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .counter span {
+      font-weight: 600;
+      color: #ff4c7e;
+    }
+
+    .text-box {
+      background-color: #2a2a2a;
+      border-radius: 20px;
+      padding: 15px 20px;
+      margin-top: 15px;
+      color: #eee;
+      font-size: 15px;
+      line-height: 1.5;
+      text-align: center;
+      box-shadow: 0 0 15px #d6336c88;
+      max-width: 90%;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+
+    .mensagem {
+      opacity: 1;
+      position: relative;
+      width: 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      transition: none;
+    }
+
+    button#botao {
+      margin-top: 30px;
+      background: #d6336c;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 45px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 15px #d6336caa;
+      transition: background-color 0.3s ease;
+    }
+
+    button#botao:hover {
+      background: #ff4c7e;
+    }
+
+    @media (max-width: 480px) {
+      .photo-wrapper {
+        height: 300px;
+        border-radius: 25px;
+      }
+
+      .text-title {
+        font-size: 16px;
+      }
+
+      .counter {
+        font-size: 13px;
+      }
+
+      .text-box {
+        font-size: 14px;
+        padding: 12px 15px;
+        min-height: 120px;
+      }
+
+      button#botao {
+        padding: 12px 35px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="container" style="display:none;">
+    <div class="photo-wrapper" id="swipeArea">
+      <div class="slider" id="slider">
+        <img src="fotos/foto1.jpg" alt="Foto 1" />
+        <img src="fotos/foto2.jpg" alt="Foto 2" />
+        <img src="fotos/foto3.jpg" alt="Foto 3" />
+      </div>
+    </div>
+
+    <div class="text-title">Eu te amo há:</div>
+    <div class="counter" id="contador">
+      <span id="anos">0 anos</span>, 
+      <span id="meses">0 meses</span>, 
+      <span id="dias">0 dias</span>, 
+      <span id="horas">0 horas</span>, 
+      <span id="minutos">0 minutos</span> e 
+      <span id="segundos">0 segundos</span>
+    </div>
+
+    <div class="text-box" id="mensagemCarousel">
+      <div class="mensagem">Não escrevo isso esperando uma resposta. Nem sei se você vai ler até o fim, mas precisava colocar pra fora.</div>
+      <div class="mensagem">Já se passaram dois anos… e ainda assim, você não saiu do meu coração.</div>
+      <div class="mensagem">Existe algo em você, no jeito que ria, nas conversas simples, nos silêncios confortáveis e que ainda ecoa em mim.</div>
+      <div class="mensagem">Não quero te convencer de nada. Só quero que saiba que o que senti (e ainda sinto) não foi pouco. Foi amor. É amor.</div>
+      <div class="mensagem">Você marcou minha vida de um jeito que ninguém mais conseguiu. Mesmo que nunca mais seja como antes, te carrego com carinho.</div>
+      <div class="mensagem">Se um dia a vida cruzar nossos caminhos de novo, estarei por aqui. Talvez mais em paz. Mas sempre grato por ter te amado.</div>
+    </div>
+  </div>
+
+  <button id="botao">Clique</button>
+
+  <audio id="bgMusic" loop>
+    <source src="musica.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const container = document.getElementById('container');
+    const botao = document.getElementById('botao');
+    const slider = document.getElementById('slider');
+    const swipeArea = document.getElementById('swipeArea');
+
+    const imagens = [
+      "fotos/foto1.jpg",
+      "fotos/foto2.jpg",
+      "fotos/foto3.jpg"
+    ];
+
+    let indiceImagem = 0;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let isDragging = false;
+    let slideInterval;
+
+    function atualizarSlider() {
+      const largura = swipeArea.clientWidth;
+      slider.style.transition = "transform 0.4s ease-in-out";
+      slider.style.transform = `translateX(-${indiceImagem * largura}px)`;
+      prevTranslate = -indiceImagem * largura;
+    }
+
+    function proximaImagem() {
+      indiceImagem = (indiceImagem + 1) % imagens.length;
+      atualizarSlider();
+    }
+
+    function iniciarArrasto(x) {
+      isDragging = true;
+      startX = x;
+      slider.style.transition = 'none';
+      if (slideInterval) clearInterval(slideInterval);
+    }
+
+    function moverArrasto(x) {
+      if (!isDragging) return;
+      const delta = x - startX;
+      currentTranslate = prevTranslate + delta;
+      slider.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function finalizarArrasto(x) {
+      if (!isDragging) return;
+      const delta = x - startX;
+      const largura = swipeArea.clientWidth;
+      if (delta < -50 && indiceImagem < imagens.length - 1) {
+        indiceImagem++;
+      } else if (delta > 50 && indiceImagem > 0) {
+        indiceImagem--;
+      }
+      atualizarSlider();
+      isDragging = false;
+      slideInterval = setInterval(proximaImagem, 5000);
+    }
+
+    swipeArea.addEventListener("touchstart", e => iniciarArrasto(e.touches[0].clientX));
+    swipeArea.addEventListener("touchmove", e => {
+      moverArrasto(e.touches[0].clientX);
+      e.preventDefault();
+    }, { passive: false });
+    swipeArea.addEventListener("touchend", e => finalizarArrasto(e.changedTouches[0].clientX));
+    swipeArea.addEventListener("mousedown", e => iniciarArrasto(e.clientX));
+    swipeArea.addEventListener("mousemove", e => {
+      if (isDragging) moverArrasto(e.clientX);
+    });
+    swipeArea.addEventListener("mouseup", e => finalizarArrasto(e.clientX));
+    swipeArea.addEventListener("mouseleave", e => {
+      if (isDragging) finalizarArrasto(e.clientX);
+    });
+
+    const dataInicio = new Date(2022, 4, 1, 0, 0, 0);
+
+    function atualizarContador() {
+      const agora = new Date();
+      let inicio = new Date(dataInicio);
+
+      let anos = agora.getFullYear() - inicio.getFullYear();
+      let meses = agora.getMonth() - inicio.getMonth();
+      let dias = agora.getDate() - inicio.getDate();
+      let horas = agora.getHours() - inicio.getHours();
+      let minutos = agora.getMinutes() - inicio.getMinutes();
+      let segundos = agora.getSeconds() - inicio.getSeconds();
+
+      if (segundos < 0) { segundos += 60; minutos--; }
+      if (minutos < 0) { minutos += 60; horas--; }
+      if (horas < 0) { horas += 24; dias--; }
+      if (dias < 0) {
+        const mesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+        dias += mesAnterior;
+        meses--;
+      }
+      if (meses < 0) { meses += 12; anos--; }
+
+      document.getElementById("anos").textContent = anos + " anos";
+      document.getElementById("meses").textContent = meses + " meses";
+      document.getElementById("dias").textContent = dias + " dias";
+      document.getElementById("horas").textContent = horas + " horas";
+      document.getElementById("minutos").textContent = minutos + " minutos";
+      document.getElementById("segundos").textContent = segundos + " segundos";
+    }
+
+    botao.addEventListener('click', () => {
+      botao.style.display = 'none';
+      container.style.display = 'flex';
+      atualizarContador();
+      atualizarSlider();
+      setInterval(atualizarContador, 1000);
+      slideInterval = setInterval(proximaImagem, 5000);
+
+      const musica = document.getElementById('bgMusic');
+      musica.play().catch(() => {});
+    });
+
+    window.addEventListener("resize", atualizarSlider);
+  </script>
+
+</body>
+</html>
